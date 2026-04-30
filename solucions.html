@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>JaFastBenAparcat | Solucions</title>
+    <link rel="icon" href="JaFastBenAparcat.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            overflow-x: hidden;
+            overscroll-behavior: none;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2.2rem;
+            z-index: 100;
+            pointer-events: auto;
+            mix-blend-mode: difference;
+        }
+        .logo-nav {
+            display: inline-block;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+            cursor: default;
+        }
+        .logo-nav img {
+            width: 160px;
+            height: auto;
+            filter: brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+            transition: transform 0.2s, filter 0.2s;
+            display: block;
+        }
+        .logo-nav:hover img {
+            transform: scale(1.02);
+            filter: brightness(0) invert(1) drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+        }
+        .nav-r {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            opacity: 0.85;
+            transition: opacity 0.2s, transform 0.2s;
+            text-transform: lowercase;
+            position: relative;
+        }
+        .nav-link:hover {
+            opacity: 1;
+            transform: translateY(-1px);
+        }
+        .nav-link.active-page {
+            opacity: 1;
+            font-weight: 600;
+        }
+        .nav-link.active-page::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 1.5px;
+            background: white;
+            border-radius: 2px;
+            opacity: 0.8;
+        }
+        .menu-btn {
+            background: rgba(255,255,255,0.15);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            backdrop-filter: blur(8px);
+            font-weight: 600;
+        }
+        @media (max-width: 860px) {
+            .navbar { padding: 1rem 1.2rem; }
+            .nav-r { gap: 1rem; }
+            .nav-link { font-size: 0.75rem; }
+            .logo-nav img { width: 120px; }
+        }
+        @media (max-width: 680px) {
+            .nav-r { gap: 0.8rem; }
+            .nav-link { font-size: 0.7rem; }
+            .logo-nav img { width: 100px; }
+            .menu-btn { padding: 0.3rem 0.9rem; }
+        }
+
+        .solutions-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0f 0%, #121218 100%);
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+
+        .solutions-wrapper {
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFFFFF, #c0c0c0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .page-header p {
+            font-size: 1.1rem;
+            color: rgba(255,255,240,0.8);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .solution-card {
+            background: rgba(8, 8, 12, 0.7);
+            backdrop-filter: blur(16px);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 1.8rem;
+            transition: all 0.3s ease;
+        }
+        .solution-card:hover {
+            transform: translateY(-6px);
+            background: rgba(12, 12, 18, 0.85);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.4);
+        }
+        .solution-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.75rem;
+        }
+        .solution-card p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: rgba(255,255,240,0.85);
+        }
+
+        .highlight-section {
+            background: rgba(8, 8, 12, 0.7);
+            backdrop-filter: blur(16px);
+            border-radius: 2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .highlight-section:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.35);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        .highlight-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFE6B0, #FFD966);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+        .highlight-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255,255,240,0.9);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .highlight-text strong {
+            color: #FFD966;
+            font-weight: 600;
+        }
+
+        .gallery-section {
+            margin-top: 2rem;
+        }
+        .gallery-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .gallery-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        .gallery-item {
+            width: 280px;
+            background: rgba(8,8,12,0.6);
+            border-radius: 1.2rem;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.35);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-caption {
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255,255,240,0.85);
+            background: rgba(0,0,0,0.5);
+            font-weight: 500;
+        }
+
+        /* LIGHTBOX AMB ANIMACIÓ SCALE 0 -> 1 */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            backdrop-filter: blur(0px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
+        }
+        .lightbox.active {
+            display: flex;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(16px);
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 85%;
+            position: relative;
+            opacity: 0;
+            transform: scale(0);
+            transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .lightbox.active .lightbox-content {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .lightbox-content img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .bg-accent {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 20%, rgba(70,70,100,0.12) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @media (max-width: 860px) {
+            .solutions-wrapper { padding: 0 1.2rem; }
+            .solutions-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .solution-card { padding: 1.2rem; }
+            .page-header h1 { font-size: 2rem; }
+            .highlight-title { font-size: 1.3rem; }
+            .highlight-section { padding: 1.2rem; }
+            .gallery-item { width: 260px; }
+            .gallery-item img { height: 180px; }
+        }
+
+        @media (max-width: 680px) {
+            .gallery-item { width: 100%; max-width: 320px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="logo-nav">
+        <img src="title.png" alt="JaFastBenAparcat Logo">
+    </a>
+    <div class="nav-r">
+        <a href="index.html" class="nav-link menu-btn">menu</a>
+        <a href="sobre.html" class="nav-link">sobre</a>
+        <a href="solucions.html" class="nav-link active-page">solucions</a>
+        <a href="equip.html" class="nav-link">equip</a>
+        <a href="eixos.html" class="nav-link">eixos</a>
+        <a href="eix-triad.html" class="nav-link">eix triat</a>
+        <a href="https://www.instagram.com/jafastbenaparcat_official/" target="_blank" class="nav-link">instagram</a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=JaFastBenAparcat@gmail.com" target="_blank" class="nav-link">contact</a>
+    </div>
+</nav>
+
+<div class="solutions-container">
+    <div class="solutions-wrapper">
+        <div class="solutions-grid">
+            <div class="solution-card">
+                <h3>Sensors i càmeres intel·ligents</h3>
+                <p>Instal·lar sensors o càmeres als carrers que detectin si un cotxe està fora de la zona d'aparcament per molt temps i trucar a un oficial de policia.</p>
+            </div>
+            <div class="solution-card">
+                <h3>Denúncia ciutadana</h3>
+                <p>Amb l'aplicació nostra podem incentivar la denúncia a l'obstrucció i aparcament incorrecte en llocs no designats, incentivant el nombre de multes i reduint aquestes males pràctiques.</p>
+            </div>
+            <div class="solution-card">
+                <h3>Més estacionaments</h3>
+                <p>Que hi hagi més estacionaments en general, perquè les persones trobin més places i no es vegin obligades a estacionar en llocs reservats per a discapacitats.</p>
+            </div>
+            <div class="solution-card">
+                <h3>Sancions més greus</h3>
+                <p>Que s'utilitzin sancions més greus per evitar aquests estacionaments il·legals i dissuadir els infractors reincidents.</p>
+            </div>
+            <div class="solution-card">
+                <h3>Targeta d'autorització</h3>
+                <p>Que la gent discapacitada tingui un tipus de targeta que autoritza que puguin aparcar en aquests llocs i que si no disposen d'aquesta targeta es truqui a la grua.</p>
+            </div>
+            <div class="solution-card">
+                <h3>Botó d'emergència per a grues</h3>
+                <p>Que les persones discapacitades tinguin un botó que automàticament truqui a una assegurança de grues. Incentivar als discapacitats per solucionar els problemes amb l'ajuda d'altres.</p>
+            </div>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-title">Solució preferida</div>
+            <div class="highlight-text">
+                Hem entrevistat a diferents persones sobre aquestes solucions per rebre la seva opinió i <strong>la que els ha agradat més ha sigut la tercera solució</strong> (més estacionaments en general). Tot i que depèn de la zona (ja que en llocs cèntrics no és viable), pot augmentar el nombre de places normals i de minusvàlids, i també la possibilitat d'ajudar a molta gent.
+            </div>
+        </div>
+
+        <div class="gallery-section">
+            <div class="gallery-title">Evidències del projecte</div>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-image="Fototelefon.png">
+                    <img src="FotoTelefon.png" alt="App denúncies">
+                    <div class="gallery-caption">Aplicació per a denúncies</div>
+                </div>
+                <div class="gallery-item" data-image="Treballant1.png">
+                    <img src="Treballant1.png" alt="Equip treballant">
+                    <div class="gallery-caption">Equip treballant</div>
+                </div>
+                <div class="gallery-item" data-image="aplicació1.jpg">
+                    <img src="aplicació1.jpg" alt="Exemple denúncia">
+                    <div class="gallery-caption">Exemple de denúncia</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-accent"></div>
+
+<div id="lightbox" class="lightbox">
+    <div class="lightbox-content">
+        <img id="lightboxImg" src="" alt="">
+    </div>
+</div>
+
+<script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    function openLightbox(imageSrc) {
+        lightboxImg.src = imageSrc;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+            if (!lightbox.classList.contains('active')) {
+                lightboxImg.src = '';
+            }
+        }, 300);
+    }
+
+    galleryItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const imageSrc = item.getAttribute('data-image');
+            if (imageSrc) openLightbox(imageSrc);
+        });
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+</script>
+</body>
+</html>
